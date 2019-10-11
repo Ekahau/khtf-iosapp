@@ -7,43 +7,29 @@
 //
 
 import UIKit
-import KhtfIosAppFw
 
 class ViewController: UIViewController {
+    
 
     override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
-    
-        //either lib A or C, as depends on order resolved during compilation, names may change after recompiled
-        let sum1  = Summator().sum(a: 4, b: 1)
-        print("sum1: \(sum1)")
-        let sum2  = Summator_().sum(a: 4, b: 1)
-        print("sum2: \(sum2)")
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
         
-        //lib B have companion object, so Summator__().sum() will not compile
-        let sum3  = Summator__.Companion().sum(a: 4, b: 1)
-        print("sum3: \(sum3)")
-    
-        //fw
-        let sumFW  = SummatorFw().sum(a: 4, b: 1)
-        print("sumFW: \(sumFW)")
-    
-        //fw lib A
-        let sumFWa  = SummatorFw().sumA(a: 4, b: 1)
-        print("sumFWa: \(sumFWa)")
-    
-        //fw lib C
-        let sumFWc  = SummatorFw().sumC(a: 4, b: 1)
-        print("sumFWc: \(sumFWc)")
-    
-        //fw lib C through class reference
-        let summatorC = SummatorFw().getSummatorC()
-        let sumFWrefC  = summatorC.sum(a: 4, b: 1)
-        print("sumFWrefC: \(sumFWrefC)")
-    
+        print("\(String(describing: Thread.current)): app started")
+      
+        
     }
-
-
-
+    
+    @IBAction func open1(_ sender: Any) {
+        self.navigationController?.pushViewController(self.storyboard!.instantiateViewController(withIdentifier: "ViewController01") as UIViewController, animated: true)
+    }
+    
+    @IBAction func open2(_ sender: Any) {
+        self.navigationController?.pushViewController(self.storyboard!.instantiateViewController(withIdentifier: "ViewController02") as UIViewController, animated: true)
+    }
+    
+    @IBAction func open3(_ sender: Any) {
+        self.navigationController?.pushViewController(self.storyboard!.instantiateViewController(withIdentifier: "ViewController03") as UIViewController, animated: true)
+    }
 }
+
