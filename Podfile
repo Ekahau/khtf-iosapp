@@ -10,7 +10,7 @@ target 'KhtfIosApp' do
   use_frameworks!
 
   # Pods for KhtfIosAppFw
-  pod 'KhtfIosAppFw', '1.0.1'
+  pod 'KhtfIosAppFw', '1.0.2'
 
   target 'KhtfIosAppTests' do
     inherit! :search_paths

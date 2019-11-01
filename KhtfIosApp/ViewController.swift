@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KhtfIosAppFw
 
 class ViewController: UIViewController {
     
@@ -16,6 +17,29 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         print("\(String(describing: Thread.current)): app started")
+        
+        //will not work for static .framework
+        //let b1 = Bundle(for: KotlinInt.self)
+        //let b2 = xxx.path(forResource: "fileFw", ofType: "txt")
+        
+        let khtfBundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("KhtfIosAppFw.bundle"))!
+        let resourcePath = khtfBundle.url(forResource: "colors", withExtension: "txt")!.absoluteString
+        ColorProviderFactory().initialPathToFile = resourcePath
+    
+    
+    
+        //call call platform specific code
+        PlatformColorProvider().addPlatformSpecificColor()
+        
+        
+        let colorProvider = ColorProviderFactory().colorProvider
+        print("\(String(describing: Thread.current)): red: \(colorProvider.getVal(key: "red"))")
+        print("\(String(describing: Thread.current)): platform: \(colorProvider.getVal(key: "platform"))")
+        
+        //overwrite value
+        colorProvider.putVal(key: "red", value: "#BB0000")
+    
+        print("\(String(describing: Thread.current)): kotlin color initialized")
       
         
     }

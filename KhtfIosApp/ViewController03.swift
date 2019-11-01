@@ -15,8 +15,27 @@ class ViewController03: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let curThread = Thread.current
-        print("\(String(describing: curThread)): view3")
+        print("\(String(describing: Thread.current)): view3")
+        
+        let colorProvider = ColorProviderFactory().colorProvider
+        print("\(String(describing: Thread.current)): red:  \(colorProvider.getVal(key: "red"))")
+    
+        //execute in BG thread
+        DispatchQueue.global(qos: .background).async {[weak self] in
+            guard let strongSelf = self else { return }
+        
+            //kotlin code that don't depend on mutable state could be called in any thread
+        
+            //execute in main thread
+            DispatchQueue.main.async {[weak self] in
+                guard let strongSelf = self else { return }
+    
+                let colorProvider3 = ColorProviderFactory().colorProvider
+                print("\(String(describing: Thread.current))(in callback): red: \(colorProvider3.getVal(key: "red"))")
+            
+            }
+        
+        }
         
     }
     
